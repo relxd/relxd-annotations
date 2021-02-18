@@ -1,0 +1,9 @@
+package {{packageName}};
+
+public class {{fullName}}{{#hasGenerics}}<{{#generics}}{{name}}{{#hasMore}}, {{/hasMore}}{{/generics}}>{{/hasGenerics}} {
+    {{#methods}}
+    public {{resultType}} {{name}}({{#params}}{{{type}}} {{name}}{{#hasMore}}, {{/hasMore}}{{/params}}){
+        {{#hasResultType}}return null;{{/hasResultType}}
+    }
+    {{/methods}}
+}
