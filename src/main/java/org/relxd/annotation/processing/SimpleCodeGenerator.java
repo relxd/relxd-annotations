@@ -12,7 +12,6 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.*;
 import javax.tools.Diagnostic;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Writer;
 
 import java.util.*;
@@ -73,7 +72,6 @@ public class SimpleCodeGenerator extends AbstractProcessor {
     private boolean generate(Element element, Set<? extends Element> methods, RelxdCodeGen relxdCodeGen) {
         Messager messager = processingEnv.getMessager();
         Writer writer = null;
-        PrintWriter printWriter = null;
         boolean ok = false;
 
         String targetPackage = (relxdCodeGen.targetPackage().equals(RelxdCodeGen.SOURCE)) ? element.getEnclosingElement().toString() : relxdCodeGen.targetPackage();
@@ -81,7 +79,10 @@ public class SimpleCodeGenerator extends AbstractProcessor {
 
         try {
             String fullName = targetPackage + "." + targetClassNamePrefix + relxdCodeGen.targetClassNameSuffix();
-            messager.printMessage(Diagnostic.Kind.OTHER, "Preparing to generate " + fullName);
+            messager.printMessage(
+                    Diagnostic.Kind.OTHER,
+                    "Preparing to generate " + fullName + ", using template " + relxdCodeGen.codeGeneratorPrefix()+relxdCodeGen.codeGeneratorTemplate()+relxdCodeGen.codeGeneratorSuffix()
+            );
 
             TypeElement te = (TypeElement)element;
             List<? extends TypeParameterElement> genericTypes = te.getTypeParameters();
@@ -98,6 +99,7 @@ public class SimpleCodeGenerator extends AbstractProcessor {
                 template.apply(data,writer);
                 writer.flush();
                 ok = true;
+                messager.printMessage(Diagnostic.Kind.OTHER, "Successfully generated " + fullName);
             }
 
         } catch (IOException e) {
@@ -108,8 +110,6 @@ public class SimpleCodeGenerator extends AbstractProcessor {
                 messager.printMessage(Diagnostic.Kind.ERROR, ioException.getMessage());
             }
 
-            if(printWriter!= null)
-                printWriter.close();
             messager.printMessage(Diagnostic.Kind.ERROR, e.getMessage());
         }
 
