@@ -30,9 +30,12 @@ public class SimpleCodeGenerator extends AbstractProcessor {
         BaseTypes.put("java.lang.Long", "Long");
     }
 
+    private AtomicInteger counter;
+
     @Override
     public synchronized void init(ProcessingEnvironment env){
         super.init(env);
+        this.counter = new AtomicInteger(0);
     }
 
     @Override
@@ -124,6 +127,7 @@ public class SimpleCodeGenerator extends AbstractProcessor {
 
     private HashMap<String, Object> prepareData(List<? extends TypeParameterElement> genericTypes, String packageName, String classNamePrefix, String classNameSuffix, Set<? extends Element> methods){
         HashMap<String, Object> out = new HashMap<>();
+        ArrayList<String> genericTypeNames = new ArrayList<>();
 
         out.put("packageName", packageName);
         out.put("classNamePrefix", classNamePrefix);
@@ -137,6 +141,7 @@ public class SimpleCodeGenerator extends AbstractProcessor {
             HashMap<String, Object> h = new HashMap<>();
             h.put("name",x.getSimpleName().toString());
             h.put("hasMore",gCount.get() > 0);
+            genericTypeNames.add(x.getSimpleName().toString());
             return h;
         }).collect(Collectors.toList());
         out.put("generics", xx);
@@ -144,18 +149,19 @@ public class SimpleCodeGenerator extends AbstractProcessor {
         AtomicInteger count = new AtomicInteger(methods.size());
         List<HashMap<String, Object>> m = methods.stream().map(x -> {
             count.decrementAndGet();
-            return prepareMethod(x, count.decrementAndGet() > 0);
+            return prepareMethod(x, count.decrementAndGet() > 0, genericTypeNames);
         }).collect(Collectors.toList());
         out.put("methods", m);
 
         return out;
     }
 
-    private HashMap<String, Object> prepareMethod(Element element, boolean hasMore){
+    private HashMap<String, Object> prepareMethod(Element element, boolean hasMore, ArrayList<String> genericTypeNames){
         HashMap<String, Object> methodInfo = new HashMap<>();
 
         ExecutableElement method = (ExecutableElement) element;
         methodInfo.put("name", method.getSimpleName());
+        methodInfo.put("id", counter.incrementAndGet());
         methodInfo.put("hasMore", hasMore);
         String resultType = BaseTypes.getOrDefault(method.getReturnType().toString(),method.getReturnType().toString());
         methodInfo.put("resultType", resultType);
@@ -164,7 +170,7 @@ public class SimpleCodeGenerator extends AbstractProcessor {
         AtomicInteger count = new AtomicInteger(method.getParameters().size());
         List<Map<String, Object>> params =  method.getParameters().stream().map(x -> {
             count.decrementAndGet();
-            return prepareMethodVars(x,count.get() > 0);
+            return prepareMethodVars(x,count.get() > 0, genericTypeNames);
         }).collect(Collectors.toList());
 
         methodInfo.put("params", params);
@@ -172,12 +178,15 @@ public class SimpleCodeGenerator extends AbstractProcessor {
         return methodInfo;
     }
 
-    private HashMap<String, Object> prepareMethodVars(VariableElement element, boolean hasMore){
+    private HashMap<String, Object> prepareMethodVars(VariableElement element, boolean hasMore, ArrayList<String> genericTypeNames){
 
+        String baseTypename = BaseTypes.getOrDefault(element.asType().toString(),element.asType().toString());
         HashMap<String, Object> methodInfo = new HashMap<>();
         methodInfo.put("name", element.getSimpleName());
-        methodInfo.put("type", BaseTypes.getOrDefault(element.asType().toString(),element.asType().toString()));
+        methodInfo.put("simpleType", (baseTypename.contains("<")) ? baseTypename.substring(0, baseTypename.indexOf("<")) : baseTypename);
+        methodInfo.put("type", baseTypename);
         methodInfo.put("hasMore", hasMore);
+        methodInfo.put("isGenericType", genericTypeNames.contains(baseTypename));
 
         return methodInfo;
     }

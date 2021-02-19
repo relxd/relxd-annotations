@@ -10,7 +10,7 @@ import java.util.Set;
 public class RemotesFileTest<K,V> {
 
     @RelxdCodeGenMethod
-    public Integer doTest(String var1, Integer var2, int var3, BigDecimal var4){
+    public Integer doTest(K var1, Integer var2, int var3, BigDecimal var4){
 
     }
 
