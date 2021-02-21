@@ -36,4 +36,4 @@ Add this dependency to your project's POM:
 
 Class | Method
 ------------|------------
-*@RelxdCodeGen* | [Use handlebars templates to generate source code from annotated classes and methods](docs/RelxdCodeGen.md) 
+*[@RelxdCodeGen](docs/RelxdCodeGen.md)* | Use handlebars templates to generate source code from annotated classes and methods 
