@@ -25,13 +25,33 @@ Parameter |Type| Description
 *{{{fullName}}}*|String|
 *{{hasGenerics}}*|Boolean|
 *{{hasGenerics}}*|Boolean|
-*{{generics}}*|[Array[Generics]](#generics)|
+*{{generics}}*|[Array[Generic]](#generic)|
+*{{methods}}*|[Array[Method]](#method)|
 
-#### Generics
+#### Generic
 Parameter |Type| Description
 ------------|------------|------------
 *{{{name}}}*|String|
-*{{{hasMore}}}*|Boolean|
+*{{hasMore}}*|Boolean|
+
+#### Method
+Parameter |Type| Description
+------------|------------|------------
+*{{{name}}}*|String|
+*{{{id}}}*|Integer|
+*{{hasMore}}*|Boolean|
+*{{{resultType}}}*|String|
+*{{hasResultType}}*|Boolean|
+*{{generics}}*|[Array[Param]](#param)|
+
+#### Param
+Parameter |Type| Description
+------------|------------|------------
+*{{{name}}}*|String|
+*{{{simpleType}}}*|String|
+*{{{type}}}*|String|
+*{{hasMore}}*|Boolean|
+*{{isGenericType}}*|Boolean|
 
 ### Example template
 ```
