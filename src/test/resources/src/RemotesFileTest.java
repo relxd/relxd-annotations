@@ -1,8 +1,7 @@
-package org.relxd.annotation.processing;
+package org.relxd.annotation;
 
 import org.relxd.annotation.codegen.RelxdCodeGen;
 import org.relxd.annotation.codegen.RelxdCodeGenMethod;
-
 import java.math.BigDecimal;
 import java.util.Set;
 
