@@ -5,6 +5,13 @@ The RelxdCodegen annotation, an intentionally simple annotation used to generate
 In order to include a class for evaluation the class/interface has to be annotated with ***@RelxdCodeGen***.
 All methods that are intended for inclusion must be annotated with ***RelxdCodeGenMethod***.
 
+```
+@RelxdCodeGen(codeGeneratorPrefix = "/codegen/", codeGeneratorTemplate = "RPCClientCodeGen", targetClassNameSuffix = "Client")
+public interface RPCMethods<K,V> extends Receiver, MethodLookup {
+
+    RPCMethodsClient<K,V> getClient();
+```
+
 ### @RelxdCodeGen Configuration Options
 Parameter | Default Value | Description
 ------------|------------|------------
