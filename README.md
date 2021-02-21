@@ -32,6 +32,28 @@ Add this dependency to your project's POM:
   <scope>compile</scope>
 </dependency>
 ```
+
+### Github Packages Maven Repo
+```
+<profiles>
+        <profile>
+            <id>github</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+                <repository>
+                    <id>github</id>
+                    <name>GitHub OWNER Apache Maven Packages</name>
+                    <url>https://maven.pkg.github.com/relxd/relxd-annotations</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+```
 ## Documentation for annotations
 
 Class | Method

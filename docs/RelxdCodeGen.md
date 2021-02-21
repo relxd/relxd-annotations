@@ -66,6 +66,57 @@ public class {{fullName}}{{#hasGenerics}}<{{#generics}}{{name}}{{#hasMore}}, {{/
 }
 ```
 
+### Example [pom.xml::plugins] using maven processor plugin
+```
+<plugin>
+    <groupId>org.bsc.maven</groupId>
+    <artifactId>maven-processor-plugin</artifactId>
+    <version>4.5</version>
+    <executions>
+        <!-- Run annotation processors on src/main/java sources -->
+        <execution>
+            <id>process</id>
+            <goals>
+                <goal>process</goal>
+            </goals>
+            <phase>generate-sources</phase>
+            <configuration>
+                <!-- We disable failure as the generated classes will not be available yet  -->
+                <failOnError>false</failOnError>
+                <!-- source output directory -->
+                <!--<outputDirectory>src/main/generated</outputDirectory>-->
+                <processors>
+                    <processor>org.relxd.annotation.codegen.SimpleCodeGenerator</processor>
+                </processors>
+            </configuration>
+        </execution>
+
+        <!-- Run annotation processors on src/test/java sources -->
+        <execution>
+            <id>process-test</id>
+            <goals>
+                <goal>process-test</goal>
+            </goals>
+            <phase>generate-test-sources</phase>
+            <configuration>
+                <failOnError>false</failOnError>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+
+<!-- Disable annotation processors during normal compilation -->
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.8.1</version>
+    <configuration>
+        <compilerArgument>-proc:none</compilerArgument>
+        <!--<generatedSourcesDirectory>src/main/generated</generatedSourcesDirectory>-->
+    </configuration>
+</plugin>
+```
+
 ### Example Usage 1
 ```Example 1
 package org.relxd.annotation;
