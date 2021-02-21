@@ -6,7 +6,7 @@
 
     <groupId>org.relxd</groupId>
     <artifactId>relxd-annotations</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.5-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

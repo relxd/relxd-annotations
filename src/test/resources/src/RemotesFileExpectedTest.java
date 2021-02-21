@@ -1,7 +1,7 @@
 package org.relxd.annotation.processing;
 
-import org.relxd.annotation.RelxdCodeGenMethod;
-import org.relxd.annotation.RelxdCodeGen;
+import org.relxd.annotation.codegen.RelxdCodeGenMethod;
+import org.relxd.annotation.codegen.RelxdCodeGen;
 
 @RelxdCodeGen
 public class RemotesFileTestRemote {

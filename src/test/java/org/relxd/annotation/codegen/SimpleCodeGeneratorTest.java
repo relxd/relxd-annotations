@@ -1,9 +1,10 @@
-package org.relxd.annotation.processing;
+package org.relxd.annotation.codegen;
 
 import com.google.testing.compile.Compilation;
 import com.google.testing.compile.CompilationSubject;
 import com.google.testing.compile.JavaFileObjects;
 import org.junit.jupiter.api.Test;
+import org.relxd.annotation.codegen.SimpleCodeGenerator;
 
 import javax.tools.JavaFileObject;
 
