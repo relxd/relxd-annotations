@@ -11,12 +11,12 @@ public class RemotesFileTest<K,V> {
 
     @RelxdCodeGenMethod
     public Integer doTest(K var1, Integer var2, int var3, BigDecimal var4){
-
+        return 0;
     }
 
     @RelxdCodeGenMethod
     public int doTest2(String var1, Integer var2, int var3, BigDecimal var4){
-
+        return 0;
     }
 
     @RelxdCodeGenMethod
@@ -26,7 +26,7 @@ public class RemotesFileTest<K,V> {
 
     @RelxdCodeGenMethod
     public V doTest4(K var1){
-
+        return null;
     }
 
     @RelxdCodeGenMethod

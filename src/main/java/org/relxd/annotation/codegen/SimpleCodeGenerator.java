@@ -63,13 +63,13 @@ public class SimpleCodeGenerator extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> supportedAnnotationTypes = new TreeSet<>();
-        supportedAnnotationTypes.add("org.relxd.annotation.RelxdCodeGen");
+        supportedAnnotationTypes.add(RelxdCodeGen.class.getCanonicalName());
         return supportedAnnotationTypes;
     }
 
     @Override
     public SourceVersion getSupportedSourceVersion() {
-        return SourceVersion.RELEASE_8;
+        return SourceVersion.RELEASE_9;
     }
 
     @Override

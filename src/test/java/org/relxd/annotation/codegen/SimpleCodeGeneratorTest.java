@@ -8,6 +8,8 @@ import org.relxd.annotation.codegen.SimpleCodeGenerator;
 
 import javax.tools.JavaFileObject;
 
+import java.util.Optional;
+
 import static com.google.testing.compile.Compiler.javac;
 
 class SimpleCodeGeneratorTest {
@@ -22,8 +24,11 @@ class SimpleCodeGeneratorTest {
         Compilation compilation = javac().withProcessors(pr).compile(src);
 
         CompilationSubject.assertThat(compilation).succeeded();
+
+        Optional<JavaFileObject> gen = compilation.generatedSourceFile("org.relxd.annotation.processing.RemotesFileTest");
+
         CompilationSubject.assertThat(compilation)
-                .generatedSourceFile("org.relxd.annotation.processing.RemotesFileTestRemote")
+                .generatedSourceFile("RemotesFileTest")
                 .hasSourceEquivalentTo(ref);
     }
 }
