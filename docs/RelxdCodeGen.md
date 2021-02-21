@@ -5,7 +5,7 @@ The RelxdCodegen annotation, an intentionally simple annotation used to generate
 In order to include a class for evaluation the class/interface has to be annotated with ***@RelxdCodeGen***.
 All methods that are intended for inclusion must be annotated with ***RelxdCodeGenMethod***.
 
-```
+```java
 @RelxdCodeGen(codeGeneratorPrefix = "/codegen/", codeGeneratorTemplate = "RPCClientCodeGen", targetClassNameSuffix = "Client")
 public interface RPCMethods<K,V> extends Receiver, MethodLookup {
 
@@ -61,7 +61,7 @@ Parameter |Type| Description
 *{{isGenericType}}*|Boolean|
 
 ### Example template
-```
+```java
 package {{packageName}};
 
 public class {{fullName}}{{#hasGenerics}}<{{#generics}}{{name}}{{#hasMore}}, {{/hasMore}}{{/generics}}>{{/hasGenerics}} {
@@ -74,7 +74,7 @@ public class {{fullName}}{{#hasGenerics}}<{{#generics}}{{name}}{{#hasMore}}, {{/
 ```
 
 ### Example [pom.xml::plugins] using maven processor plugin
-```
+```xml
 <plugin>
     <groupId>org.bsc.maven</groupId>
     <artifactId>maven-processor-plugin</artifactId>
@@ -125,7 +125,7 @@ public class {{fullName}}{{#hasGenerics}}<{{#generics}}{{name}}{{#hasMore}}, {{/
 ```
 
 ### Example Usage 1
-```Example 1
+```java
 package org.relxd.annotation;
 
 import org.relxd.annotation.codegen.RelxdCodeGen;
@@ -165,7 +165,7 @@ public class RemotesFileTest<K,V> {
 
 
 ### Example Usage 2
-```Example 2
+```java
 package org.relxd.grid.cache;
 
 import org.jgroups.Receiver;

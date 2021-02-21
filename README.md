@@ -34,7 +34,7 @@ Add this dependency to your project's POM:
 ```
 
 ### Github Packages Maven Repo
-```
+```xml
 <profiles>
     <profile>
         <id>github</id>
