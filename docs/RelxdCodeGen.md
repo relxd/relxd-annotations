@@ -25,7 +25,7 @@ Parameter |Type| Description
 *{{{fullName}}}*|String|
 *{{hasGenerics}}*|Boolean|
 *{{hasGenerics}}*|Boolean|
-*{{generics}}*|[Array[Generics]](docs/#Generics)|
+*{{generics}}*|[Array[Generics]](#generics)|
 
 #### Generics
 Parameter |Type| Description
